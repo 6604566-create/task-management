@@ -1,9 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import ProtectedRoute from "./routes/protectedRoute";
+
 
 import Login from "./layouts/auth/Login";
 import Register from "./layouts/auth/Register";
+import ProtectedRoute from "./routes/protectedRoute";
 
 import Dashboard from "./layouts/dashboard/Dashboard";
 import Employees from "./layouts/employees/Employees";
