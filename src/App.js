@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./layouts/auth/Login";
 import Register from "./layouts/auth/Register";
-import ProtectedRoute from "./routes/protectedRoute";
+
 
 import Dashboard from "./layouts/dashboard/Dashboard";
 import Employees from "./layouts/employees/Employees";
@@ -10,6 +10,7 @@ import Projects from "./layouts/projects/Projects";
 import Tasks from "./layouts/tasks/Tasks";
 import Timesheets from "./layouts/timesheets/Timesheets";
 import Attendance from "./layouts/attendance/Attendance";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 /* ================= AUTH HELPER ================= */
 
