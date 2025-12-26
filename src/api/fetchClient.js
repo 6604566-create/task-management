@@ -9,14 +9,17 @@ const fetchClient = async (endpoint, options = {}) => {
     method: options.method || "GET",
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
-  // Handle empty responses
-  const text = await res.text();
-  const data = text ? JSON.parse(text) : {};
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    data = {};
+  }
 
   if (!res.ok) {
     throw new Error(data.message || "Request failed");
