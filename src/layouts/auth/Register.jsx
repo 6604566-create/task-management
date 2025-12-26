@@ -31,8 +31,8 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // ✅ fetchClient usage (NOT axios)
-      await fetchClient("/api/register", {
+      // ✅ CORRECT BACKEND ROUTE
+      await fetchClient("/api/auth/register", {
         method: "POST",
         body: formData,
       });
@@ -98,11 +98,7 @@ export default function Register() {
               required
             />
 
-            <button
-              type="submit"
-              style={styles.submitBtn}
-              disabled={loading}
-            >
+            <button type="submit" style={styles.submitBtn} disabled={loading}>
               {loading ? "Creating..." : "SIGN UP →"}
             </button>
 
@@ -123,106 +119,3 @@ export default function Register() {
     </div>
   );
 }
-
-/* ================= STYLES ================= */
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "linear-gradient(135deg, #0b3c5d, #3a0a45)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontFamily: "Inter, sans-serif",
-  },
-
-  card: {
-    width: "1250px",
-    background: "#fff",
-    borderRadius: "34px",
-    display: "flex",
-    overflow: "hidden",
-  },
-
-  left: {
-    width: "55%",
-    padding: "30px",
-    overflowY: "auto",
-  },
-
-  logo: {
-    color: "#e07a9a",
-    fontWeight: 900,
-    fontSize: "29px",
-  },
-
-  welcome: {
-    marginTop: "14px",
-    fontSize: "18px",
-  },
-
-  heading: {
-    fontSize: "56px",
-    fontWeight: 700,
-    margin: "16px 0 40px",
-  },
-
-  form: {
-    paddingBottom: "40px",
-  },
-
-  label: {
-    fontSize: "18px",
-    marginBottom: "8px",
-    display: "block",
-  },
-
-  input: {
-    width: "100%",
-    height: "64px",
-    background: "#cfe6f3",
-    borderRadius: "10px",
-    border: "none",
-    padding: "0 20px",
-    fontSize: "18px",
-    marginBottom: "22px",
-    outline: "none",
-  },
-
-  submitBtn: {
-    marginTop: "20px",
-    width: "220px",
-    height: "58px",
-    background: "#e07a9a",
-    borderRadius: "30px",
-    border: "none",
-    color: "#fff",
-    fontSize: "16px",
-    fontWeight: 600,
-    cursor: "pointer",
-  },
-
-  footer: {
-    marginTop: "32px",
-    fontSize: "16px",
-  },
-
-  link: {
-    color: "#e07a9a",
-    fontWeight: 600,
-    textDecoration: "none",
-  },
-
-  right: {
-    width: "45%",
-    background: "#cfe6f3",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  image: {
-    width: "90%",
-    animation: "float 6s ease-in-out infinite",
-  },
-};

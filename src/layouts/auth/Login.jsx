@@ -18,10 +18,10 @@ export default function Login() {
   /* ================= HANDLERS ================= */
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -29,8 +29,8 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // ✅ fetchClient usage (FUNCTION, not axios)
-      const data = await fetchClient("/api/login", {
+      // ✅ CORRECT fetchClient usage
+      const data = await fetchClient("/api/auth/login", {
         method: "POST",
         body: formData,
       });
@@ -202,6 +202,5 @@ const styles = {
 
   image: {
     width: "90%",
-    animation: "float 6s ease-in-out infinite",
   },
 };
