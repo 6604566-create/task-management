@@ -15,20 +15,27 @@ export default function Login() {
     password: "",
   });
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  /* ================= HANDLERS ================= */
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await api.post("/auth/login", formData);
+      // ✅ CORRECT API ROUTE (matches backend)
+      const res = await api.post("/login", formData);
 
       // ✅ Save token
       localStorage.setItem("token", res.data.token);
 
-      // ✅ Redirect
+      // ✅ Redirect after login
       navigate("/admin/dashboard", { replace: true });
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
@@ -36,6 +43,8 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  /* ================= UI ================= */
 
   return (
     <div style={styles.page}>

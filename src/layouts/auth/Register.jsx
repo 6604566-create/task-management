@@ -17,18 +17,24 @@ export default function Register() {
     password: "",
   });
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  /* ================= HANDLERS ================= */
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // ✅ FIXED API PATH
-      await api.post("/auth/register", formData);
+      // ✅ CORRECT API ROUTE (matches backend)
+      await api.post("/register", formData);
 
-      // ✅ Redirect to login
+      // ✅ Redirect to login page
       navigate("/", { replace: true });
     } catch (err) {
       alert(err.response?.data?.message || "Registration failed");
@@ -36,6 +42,8 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  /* ================= UI ================= */
 
   return (
     <div style={styles.page}>
