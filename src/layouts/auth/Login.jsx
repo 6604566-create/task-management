@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from '../../api/axios.js'
+import api from "../../api/axios";
 
 import girlImg from "../../assets/sigin/girl.png";
 
@@ -23,8 +23,12 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post("/login", formData);
+      const res = await api.post("/auth/login", formData);
+
+      // ✅ Save token
       localStorage.setItem("token", res.data.token);
+
+      // ✅ Redirect
       navigate("/admin/dashboard", { replace: true });
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
@@ -38,8 +42,7 @@ export default function Login() {
       <div style={styles.card}>
         {/* LEFT */}
         <div style={styles.left}>
-          <p style={styles.logo}>TASKFLOW</p>  
-
+          <p style={styles.logo}>TASKFLOW</p>
           <p style={styles.welcome}>Welcome back !!!</p>
           <h1 style={styles.heading}>Log In</h1>
 
@@ -55,8 +58,7 @@ export default function Login() {
               required
             />
 
-        
-
+            <label style={styles.label}>Password</label>
             <input
               style={styles.input}
               type="password"
@@ -67,7 +69,6 @@ export default function Login() {
               required
             />
 
-            {/* ✅ LOGIN BUTTON FIXED */}
             <button
               type="submit"
               style={styles.loginBtn}
@@ -87,9 +88,7 @@ export default function Login() {
 
         {/* RIGHT */}
         <div style={styles.right}>
-          <div style={styles.illustrationBox}>
-            <img src={girlImg} alt="illustration" style={styles.image} />
-          </div>
+          <img src={girlImg} alt="illustration" style={styles.image} />
         </div>
       </div>
     </div>
@@ -108,21 +107,19 @@ const styles = {
     justifyContent: "center",
     fontFamily: "Inter, sans-serif",
   },
-card: {
-  width: "1250px",
-  minHeight: "40px",   // ✅ FIXED
-  background: "#fff",
-  borderRadius: "34px",
-  display: "flex",
-  overflow: "hidden",
-},
 
-left: {
-  width: "65%",
-  padding: "40px",
-  overflowY: "auto",    // ✅ FIXED
-},
+  card: {
+    width: "1250px",
+    background: "#fff",
+    borderRadius: "34px",
+    display: "flex",
+    overflow: "hidden",
+  },
 
+  left: {
+    width: "60%",
+    padding: "40px",
+  },
 
   logo: {
     color: "#e07a9a",
@@ -159,20 +156,6 @@ left: {
     outline: "none",
   },
 
-  passwordRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  signupInline: {
-    fontSize: "14px",
-    color: "#e07a9a",
-    fontWeight: 600,
-    textDecoration: "none",
-  },
-
-  /* ✅ BUTTON CLEARLY VISIBLE */
   loginBtn: {
     marginTop: "10px",
     width: "200px",
@@ -198,21 +181,15 @@ left: {
   },
 
   right: {
-    width: "45%",
+    width: "40%",
     background: "#cfe6f3",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
 
-  illustrationBox: {
-    width: "92%",
-    height: "92%",
-    borderRadius: "32px",
-  },
-
   image: {
-    width: "100%",
+    width: "90%",
     animation: "float 6s ease-in-out infinite",
   },
 };
